@@ -31,5 +31,5 @@ jobs:
           clientId: ${{secrets.CLIENT_ID}}
           clientSecret: ${{secrets.CLIENT_SECRET}}
         run: |
-          echo "${{ Env.GITHUB_WORKSPACE }}\tosca_execution_client.ps1 -toscaServerUrl $TOSCA_SERVER -eventsConfigFilePath $TOSCA_EVENTS_CONFIGFILE_PATH -clientId $Env:clientId -clientSecret $Env:clientSecret -creator gitHub Runner"
+          echo "$env:GITHUB_WORKSPACE\tosca_execution_client.ps1 -toscaServerUrl ${{var.TOSCA_SERVER}} -eventsConfigFilePath ${{var.TOSCA_EVENTS_CONFIGFILE_PATH}} -clientId $Env:clientId -clientSecret $Env:clientSecret -creator gitHub Runner"
           # "$Env:GITHUB_WORKSPACE\tosca_execution_client.ps1" -toscaServerUrl "$Tosca_Server" -eventsConfigFilePath "$TOSCA_EVENTS_CONFIGFILE_PATH" -clientId "$Env:clientId" -clientSecret "$Env:clientSecret" -creator "gitHub Runner"
