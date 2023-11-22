@@ -41,6 +41,7 @@ param(
     [Alias("s")]
     [switch]$silent
 )
+Write-output "server: $toscaServerUrl secret: $clientSecret"
 
 [bool]$validationFailed = $true
 
