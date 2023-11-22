@@ -40,5 +40,5 @@ jobs:
           clientId: ${{secrets.CLIENT_ID}}
           clientSecret: ${{secrets.CLIENT_SECRET}}
         shell: pwsh
-        run: 
+        run: |
           "${{GITHUB.WORKSPACE}}\tosca_execution_client.ps1" -toscaServerUrl ${{vars.TOSCA_SERVER}} -eventsConfigFilePath "${{vars.TOSCA_EVENTS_CONFIGFILE_PATH}}" -clientId $clientId -clientSecret $clientSecret -creator "gitHub Runner"
