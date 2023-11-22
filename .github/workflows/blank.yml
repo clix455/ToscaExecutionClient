@@ -18,19 +18,25 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
+    
+    env: 
+      clientId: ${{secrets.CLIENT_ID}}
+      clientSecret: ${{secrets.CLIENT_SECRET}}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      # Runs a single command using the runners shell
-      - name: Run Tosca Tests
-        env: 
-          clientId: ${{secrets.CLIENT_ID}}
-          clientSecret: ${{secrets.CLIENT_SECRET}}
+      # Valiate arguments
+      - name: Validate arguments value
         run: |
           dir "${{GITHUB.WORKSPACE}}"
           echo "${{GITHUB.WORKSPACE}}\tosca_execution_client.ps1 -toscaServerUrl ${{vars.TOSCA_SERVER}} -eventsConfigFilePath ${{vars.TOSCA_EVENTS_CONFIGFILE_PATH}} -clientId $clientId -clientSecret $clientSecret -creator gitHub Runner"
-          ".\tosca_execution_client.ps1" -toscaServerUrl ${{vars.TOSCA_SERVER}} -eventsConfigFilePath "${{vars.TOSCA_EVENTS_CONFIGFILE_PATH}}" -clientId $clientId -clientSecret $clientSecret -creator "gitHub Runner"
+        
+        # Runs powershell
+      - name: Run Tosca Tests
+        shell: pwsh
+        run: |
+          "${{GITHUB.WORKSPACE}}\tosca_execution_client.ps1" -toscaServerUrl ${{vars.TOSCA_SERVER}} -eventsConfigFilePath "${{vars.TOSCA_EVENTS_CONFIGFILE_PATH}}" -clientId $clientId -clientSecret $clientSecret -creator "gitHub Runner"
