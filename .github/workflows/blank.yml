@@ -34,7 +34,7 @@ jobs:
           dir "${{GITHUB.WORKSPACE}}"
           echo "${{GITHUB.WORKSPACE}}\tosca_execution_client.ps1 -toscaServerUrl ${{vars.TOSCA_SERVER}} -eventsConfigFilePath ${{vars.TOSCA_EVENTS_CONFIGFILE_PATH}} -clientId $clientId -clientSecret $clientSecret -creator gitHub Runner"
         
-        # Runs powershell
+      # Runs powershell
       - name: Run Tosca Tests
         env:
           clientId: ${{secrets.CLIENT_ID}}
